@@ -9,6 +9,14 @@ def myCode():
                 print(input_list_str[j], end='')
         print('')
 
+def BestCode():
+    t = int(input())
+    for i in range(t):
+        num, s = input().split() # split을 통해 변수 2개를 받음
+        text = ''
+        for i in s:
+            text += int(num) * i # text에 문자i를 num번 반복해 추가
+        print(text)
 
 def main():
     myCode()
