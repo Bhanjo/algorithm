@@ -1,6 +1,3 @@
-from abc import abstractmethod
-
-
 def myCode():
     sugar = int(input())
     small = 0
