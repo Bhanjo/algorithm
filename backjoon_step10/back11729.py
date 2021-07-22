@@ -1,4 +1,5 @@
 def hanoi(num,a,b,c):
+    print(num,"시작",a,b,c)
     if(num == 1):
         print(a, c)
     else:
