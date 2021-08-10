@@ -21,7 +21,7 @@ def myCode():
             arr.pop() # 조건이 True 되기 직전인 상태로 되돌림
             check_num[i] = False # check 초기화
     DFS(0)
-
+# testsetse
 def main():
     myCode()
 if __name__ == '__main__':
