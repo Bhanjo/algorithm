@@ -1,3 +1,4 @@
+# math 모듈의 factorial 사용하여 풀 수 있음
 import sys
 input = sys.stdin.readline
 
