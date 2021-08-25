@@ -11,8 +11,7 @@ for _ in range(t):
             stack.append('(')
         else:
             if stack:
-                right = stack.pop()
-                if right == '(' and vps[i] == ')':
+                if stack.pop() == '(' and vps[i] == ')':
                     check = True
                 else:
                     check = False
