@@ -3,7 +3,6 @@ input = sys.stdin.readline
 
 tc = int(input())
 stack = []
-hap = 0
 for _ in range(tc):
     num = int(input())
     if num == 0:
