@@ -9,7 +9,7 @@ height = 0
 for i in range(257):
     bottom = 0
     top = 0
-    # 0층부터 256층까지 모든 경우의 수를 다 구함
+    # 0층부터 256층까지 모든 땅을 i층으로 고르는 경우의 수를 다 구함
     for j in range(N):
         for k in range(M):
             if ground[j][k] >= i:
