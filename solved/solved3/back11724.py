@@ -1,5 +1,6 @@
 import sys
 input = sys.stdin.readline
+sys.setrecursionlimit(10000)
 
 n, m = map(int, input().split())
 graph = [[]*i for i in range(n+1)]
@@ -10,13 +11,11 @@ for _ in range(m):
     graph[u].append(v)
     graph[v].append(u)
 
-print(graph)
-
 
 def dfs(a):
+    checked.append(a)
     for i in graph[a]:
         if i not in checked:
-            checked.append(i)
             dfs(i)
 
 
