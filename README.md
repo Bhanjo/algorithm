@@ -3,35 +3,33 @@
 ## 사용 언어
 
 - Python
+- C++
 - JavaScript
 
 ## 파일 구조
 
 ```bash
 ├── algorithm
-│   ├── (algorithm_name).py(js)
-│   └── (problem_name).py(js)
 │
 ├── backjoon
 │   ├── backjoon_implementation
-│   │   └── back(n).py(js)
-│   │
 │   └── backjoon_step(n)
-│       └── back(n).py(js)
 │
 ├── codility
-│   └── lesson(n)-(m).py(js)
 │
 ├── like_lion
-│   └── (fileName).py(js)
+│   └── (fileName)
 │
 ├── programmers
 │   └── lv(n)
-│       └── (fileName).py(js)
+│   └── highScoreKit
+│       └── (algorithmName)
+│
+├── samsung sw cademy
+│   └── D(n)
 │
 └── solved
     └── solved(n)
-        └── back(n).py(js)
 ```
 
 ## 문제 풀이와 해설
