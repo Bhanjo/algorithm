@@ -25,7 +25,7 @@
 │   └── highScoreKit
 │       └── (algorithmName)
 │
-├── samsung sw cademy
+├── swea
 │   └── D(n)
 │
 └── solved
