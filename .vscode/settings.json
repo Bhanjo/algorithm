@@ -2,7 +2,9 @@
   "python.formatting.provider": "autopep8",
   "editor.tabSize": 2,
   "files.associations": {
+    "*.js": "javascript",
     "*.py": "python",
-    "vector": "cpp"
+    "vector": "cpp",
+    "xstring": "cpp"
   }
 }
