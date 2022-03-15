@@ -1,6 +1,6 @@
 {
   "python.formatting.provider": "autopep8",
-  "editor.tabSize": 2,
+  "editor.tabSize": 4,
   "files.associations": {
     "*.js": "javascript",
     "*.py": "python",
