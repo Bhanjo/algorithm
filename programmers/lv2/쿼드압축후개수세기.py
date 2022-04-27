@@ -3,13 +3,9 @@ def solution(arr):
 
     def divcon(startX, endX, startY, endY):
         targetNum = arr[startX][startY]
-        if startX == endX == startY == endY:
-            if targetNum == 0: answer[0] += 1
-            else: answer[1] += 1
-            return
-        
         midX = (startX + endX) // 2
         midY = (startY + endY) // 2
+        
         for i in range(startX, endX + 1):
             for j in range(startY, endY + 1):
                 if arr[i][j] != targetNum:
