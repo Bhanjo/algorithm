@@ -1,6 +1,6 @@
 import math
 
-
+# C, C# 등 살짝만 다른걸 구분해야할 때는 치환이 편하다
 def solution(m, musicinfos):
     answer = '(None)'
     m = m.replace('A#', 'a').replace('C#', 'c'). replace('D#', 'd').replace('F#', 'f').replace('G#', 'g')
