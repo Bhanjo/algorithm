@@ -8,20 +8,16 @@ for t in range(tc):
     commands = str(input()).rstrip()
     stSize = int(input())
     reverseCount = 0
-    st = input().rstrip()[1:-1].split(',')
-    q = deque(st)
+    q = deque(input().rstrip()[1:-1].split(','))
     isCorrect = True
-    if(stSize == 0):
-        q = []
+    if(stSize == 0): q = []
     for i in commands:
         if i == 'R':
             reverseCount += 1
         if i == 'D':
             if len(q) > 0:
-                if reverseCount % 2 == 1:
-                    q.pop()
-                else:
-                    q.popleft()
+                if reverseCount % 2 == 1: q.pop()
+                else: q.popleft()
             else:
                 isCorrect = False
                 print('error')
@@ -29,6 +25,4 @@ for t in range(tc):
     if isCorrect:
         if reverseCount % 2 == 1:
             q.reverse()
-            print('['+','.join(q)+']')
-        else:
-            print('['+','.join(q)+']')
+        print('['+','.join(q)+']')
