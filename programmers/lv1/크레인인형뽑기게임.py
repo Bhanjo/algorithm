@@ -45,3 +45,25 @@ def solution(board, moves):
                 break
 
     return answer
+
+# 2회차
+def solution(board, moves):
+    answer = 0
+    depth = len(board)
+    st = []
+    for i in moves:
+        idx = i-1
+        for j in range(depth):
+            if board[j][idx] > 0:
+                item = board[j][idx]
+                board[j][idx] = 0
+                if len(st) == 0:
+                    st.append(item)
+                else:
+                    if item == st[-1]:
+                        st.pop()
+                        answer += 2
+                    else:
+                        st.append(item)
+                break
+    return answer
