@@ -24,22 +24,25 @@ def solution(s):
     return answer
 
 # 다른 풀이
-def solition(s):
-    answer = 10**5
+def solution(s):
+    answer = 10**10
+
+    # 1부터 글자수 절반까지 압축 시도
     for i in range(1, len(s)//2+2):
-        word = ''
+        word = '' # 압축한 결과
         cnt = 1
-        temp = s[:i]
-        for j in range(i, len(s) + i, i):
-            if temp == s[j:j+i]:
+        tempWord = s[:i] # 압축 후보
+        # 끝까지 탐색
+        for j in range(i, len(s)+i, i): # 끝 까지 압축 횟수만큼 증가하며 반복
+            if tempWord == s[j:j+i]: # 압축 후보와 같음
                 cnt += 1
             else:
-                if cnt == 1:
-                    word += temp
+                if cnt == 1: # 압축할 글자 없으면 그대로 붙이기
+                    word += tempWord
                 else:
-                    word += (str(cnt) + temp)
-                temp= s[j:j+i]
+                    word += str(cnt)+tempWord
+                tempWord = s[j:j+i] # 압축 후보 갱신
                 cnt = 1
         answer = min(answer, len(word))
     return answer
-solition("abcabcabcabcdededededede")
+solution("abcabcabcabcdededededede")
