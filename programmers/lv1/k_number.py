@@ -20,3 +20,13 @@ def solution(array, commands):
 
 
 solution(array, commands)
+
+# 2회차
+def solution(array, commands):
+    answer = []
+    for i in commands:
+        start, end, point = i
+        newArr = array[start-1:end]
+        newArr.sort()
+        answer.append(newArr[point-1])
+    return answer
