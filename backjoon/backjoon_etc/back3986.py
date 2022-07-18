@@ -1,19 +1,17 @@
 import sys
 input = sys.stdin.readline
- 
+
 n = int(input())
-cnt = 0
- 
-for _ in range(n):
-    s = input().strip()
-    stack = []
- 
-    for i in range(len(s)):
-        if stack and s[i] == stack[-1]:
-            stack.pop()
+answer = 0
+
+for i in range(n):
+    word = list(input().strip())
+    st = []
+    for w in range(len(word)):
+        if st and word[w] == st[-1]:
+            st.pop()
         else:
-            stack.append(s[i])
- 
-    if not stack:
-        cnt += 1
-print(cnt)
+            st.append(word[w])
+    if not st:
+        answer += 1
+print(answer)
