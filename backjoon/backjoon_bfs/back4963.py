@@ -6,7 +6,7 @@ input = sys.stdin.readline
 dx = [-1, 1, 0, 0, -1, -1, 1, 1]
 dy = [0, 0, -1, 1, -1, 1, -1, 1]
 
-def dfs(q, graph, visit):
+def bfs(q, graph, visit):
     while(q):
         i, j = q.pop()
         if not visit[i][j]:
@@ -31,6 +31,6 @@ while(True):
         for y in range(w):
             if graph[x][y] == 1 and not visit[x][y]:
                 q.append((x,y))
-                dfs(q, graph, visit)
+                bfs(q, graph, visit)
                 answer += 1
     print(answer)
