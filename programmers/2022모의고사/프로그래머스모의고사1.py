@@ -1,3 +1,4 @@
+# 1회차
 def solution(X, Y):
     answer = ''
     dic = {
@@ -24,4 +25,24 @@ def solution(X, Y):
     answer = ''.join(nums)
     answer = str(answer)
 
+    return answer
+
+# 2회차
+def solution(X, Y):
+    answer = []
+    arr = [0,0,0,0,0,0,0,0,0,0]
+    for i in X:
+        arr[int(i)] += 1
+    for i in Y:
+        if arr[int(i)] > 0:
+            arr[int(i)] -= 1
+            answer.append(i)
+    
+    if not answer:
+        return "-1"
+    if answer.count("0") == len(answer):
+        answer = "0"
+    else:
+        answer.sort(reverse=True)
+        answer = ''.join(answer)
     return answer
