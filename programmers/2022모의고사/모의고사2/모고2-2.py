@@ -30,3 +30,37 @@ def solution(topping):
         if arr1Items == arr2Items:
             answer += 1
     return answer
+
+# 2회차 (100/100)
+from collections import deque
+def solution(topping):
+    answer = 0
+    a = dict()
+    b = dict()
+    topping = deque(topping)
+
+    # 형 딕셔너리 갱신
+    aCnt = 0 # 딕셔너리 key 개수
+    for i in topping:
+        if i not in a:
+            a[i] = 1
+            aCnt += 1
+        else:
+            a[i] += 1
+
+    
+    # 동생에게 하나씩 넘기고 판단
+    bCnt = 0
+    for i in topping:
+        a[i] -= 1
+        if a[i] <= 0:
+            aCnt -= 1
+        if i not in b:
+            b[i] = 1
+            bCnt += 1
+        else:
+            b[i] += 1
+        if aCnt == bCnt:
+            answer += 1
+    
+    return answer
