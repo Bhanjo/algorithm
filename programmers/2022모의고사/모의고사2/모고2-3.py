@@ -3,7 +3,8 @@ import heapq
 
 def solution(n, roads, sources, destination):
     answer = []
-    graph = [[]*(n+1) for _ in range(n+1)]
+    # graph = [[]*(n+1) for _ in range(n+1)]
+    graph = {i+1: [] for i in range(n)}
 
     for i in roads:
         start, end = i[0], i[1]
@@ -33,37 +34,32 @@ def solution(n, roads, sources, destination):
     return answer
 
 
-# 
-import heapq
+# 2회차
 from collections import deque
 
 def solution(n, roads, sources, destination):
     answer = []
-    graph = [[]*(n+1) for _ in range(n+1)]
+    graph = [[] for _ in range(n+1)]
 
     for i in roads:
-        start, end = i[0], i[1]
-        graph[start].append(end)
-        graph[end].append(start)
-
-    q = deque()
-    q.append(destination)
-    visit = [[False]*(n+1) for _ in range(n+1)]
-    dist = [100000]*(n+1)
-    dist[destination] = 0
-
-    while(q):
-        currNode = q.popleft()
-        for i in graph[currNode]:
-            if not visit[currNode][i]:
-                visit[currNode][i] = True
-                dist[i] = min(dist[i], dist[currNode] + 1)
-                q.append(i)
+        graph[i[0]].append(i[1])
+        graph[i[1]].append(i[0])
     
-    for i in range(len(dist)):
-        if i in sources:
-            if dist[i] < 100000:
-                answer.append(dist[i])
-            else:
-                answer.append(-1)
+    visit = [-1] * (n+1)
+
+    def bfs():
+        q = deque()
+        q.append(destination)
+        visit[destination] = 0
+        while(q):
+            currNode = q.popleft()
+            for i in graph[currNode]:
+                if visit[i] == -1:
+                    visit[i] = visit[currNode] + 1
+                    q.append(i)
+
+    bfs()
+    for i in sources:
+        answer.append(visit[i])
+        
     return answer
