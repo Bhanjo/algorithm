@@ -41,3 +41,58 @@ def solution(p):
             else:
                 answer += '('
     return answer
+
+#  @ 2회차 @
+
+# 3단계
+def isPerfect(u):
+    st = []
+    while(u):
+        a = u[0]
+        u = u[1:]
+        if a == '(':
+            st.append(a)
+        else:
+            if len(st) == 0:
+                return False
+            st.pop()
+    if len(st) > 0:
+        return False
+    return True
+
+# 1단계
+def divBraket(p):
+    if p == '':
+        return ''
+    u = ''
+    v = p
+    # 2단계
+    while(v):
+        u += v[0]
+        v = v[1:]
+        if u.count('(') == u.count(')'):
+            break
+    # 3-1단계
+    temp = ''
+    if isPerfect(u):
+        u += divBraket(v)
+        return u
+    # 4단계
+    temp = '('
+    temp += divBraket(v)
+    temp += ')'
+    u = u[1:len(u)-1]
+    tempU = ''
+    for i in u:
+        if i == '(':
+            tempU += ')'
+        else:
+            tempU += '('
+    temp += tempU
+    u = temp
+    return u
+        
+
+def solution(p):
+    answer = divBraket(p)
+    return answer
