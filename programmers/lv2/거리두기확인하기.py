@@ -92,3 +92,47 @@ def solution(places):
         answer.append(bfs(i))
     
     return answer
+
+# 2회차
+from collections import deque
+# P = 사람, O = 빈공간, X = 칸막이
+def ad(q, graph):
+    visit = [[0]*5 for _ in range(5)]
+    dist = [[0]*5 for _ in range(5)]
+    dx = [-1,1,0,0]
+    dy = [0,0,-1,1]
+    while(q):
+        x, y = q.popleft()
+        visit[x][y] = 1
+        for i in range(4):
+            mx = dx[i] + x
+            my = dy[i] + y
+            if 0 <= mx < 5 and 0 <= my < 5:
+                if visit[mx][my] < 1:
+                    if graph[mx][my] == 'P' or graph[mx][my] == 'O':
+                        dist[mx][my] += dist[x][y] + 1
+                        visit[mx][my] = 1
+                        if graph[mx][my] == 'P' and dist[mx][my] <= 2: # 맨허튼 거리 미준수
+                            return 0
+                        q.append([mx,my])
+    return 1
+
+def bfs(graph):
+    ans = 1
+    q = deque()
+    for i in range(5):
+        for j in range(5):
+            if graph[i][j] == 'P':
+                q.append([i,j])
+                ans = ad(q, graph)
+                if ans == 0:
+                    return 0
+    return ans
+
+def solution(places):
+    answer = []
+    for i in places:
+        graph = [list(j) for j in i]
+        isCorrect = bfs(graph)
+        answer.append(isCorrect)
+    return answer
