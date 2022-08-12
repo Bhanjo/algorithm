@@ -61,3 +61,39 @@ def solution(orders, course):
 
 solution(["ABCFG", "AC", "CDE", "ACDE", "BCFG", "ACDEH"], [2,3,4])
 # solution(["XYZ", "XWY", "WXA"], [2,3,4])
+
+# 2회차
+from itertools import combinations
+
+def solution(orders, course):
+    answer = []
+    combi = {} # 조합에 대한 등장 횟수 카운트
+    for i in range(len(orders)-1):
+        order1 = set(list(orders[i]))
+        for j in range(i+1, len(orders)):
+            order2 = set(list(orders[j]))
+            # 1,2의 교집합 구하기
+            cross = list(order1 & order2)
+            cross.sort()
+            # 교집합을 통해서 조합 추출
+            for idx in range(len(cross)+1):
+                sub = list(combinations(cross,idx))
+                for foods in sub:
+                    foods = ''.join(foods)
+                    if foods not in combi:
+                        combi[foods] = 1
+                    else:
+                        combi[foods] += 1
+    for c in course:
+        candidate = []
+        maxValue = 0
+        for i in combi: # 조합별 주문 횟수
+            if len(i) == c:
+                if combi[i] == maxValue:
+                    candidate.append(i)
+                elif combi[i] > maxValue:
+                    maxValue = combi[i]
+                    candidate = [i]
+        answer.extend(candidate)
+        answer.sort()
+    return answer
