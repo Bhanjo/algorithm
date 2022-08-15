@@ -66,3 +66,41 @@ def solution(str1, str2):
         return 65536
     else:
         return int(len(inter) / len(union) * 65536)
+
+# 2회차
+def solution(str1, str2):
+    answer = 0
+    str1 = str1.lower()
+    str2 = str2.lower()
+    listA = []
+    listB = []
+    dic = {}
+    
+    # 나눈 글자가 알파벳일 때만 리스트에 추가
+    for i in range(len(str1)-1):
+        word = str1[i:i+2]
+        if word.isalpha():
+            listA.append(word)
+    for i in range(len(str2)-1):
+        word = str2[i:i+2]
+        if word.isalpha():
+            listB.append(word)
+    
+    # 다중집합의 교집합 합집합 판별
+    for i in listA:
+        countA = listA.count(i)
+        countB = listB.count(i)
+        if i not in dic: 
+                dic[i] = [min(countA,countB), max(countA,countB)]
+    for i in listB: # listB에만 있는 요소들 추가
+        if i not in dic:
+            dic[i] = [0,listB.count(i)]
+    
+    cross = 0
+    uni = 0
+    for i in dic:
+        cross += dic[i][0]
+        uni += dic[i][1]
+    
+    answer = int((cross/uni)*65536) if uni != 0 else 65536
+    return answer
