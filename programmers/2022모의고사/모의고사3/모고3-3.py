@@ -29,7 +29,7 @@ def solution(distance, scope, times):
         for j in range(len(scope[i])):
             mok = scope[i][j] // totalTime
             rest = scope[i][j] % totalTime
-            if 1 <= rest <= time[0]+1:
+            if 0 <= rest <= time[0]+1:
                 # print('걸림', scope[i][j] % totalTime, i,j)
                 temp = [i+1 for i in range(totalTime*mok, totalTime*mok+time[0])]
                 for t in temp:
