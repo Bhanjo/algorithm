@@ -35,3 +35,47 @@ def dfs(target):
 
 dfs(0)
 print(hap)
+
+# 2회차 => pypy가 아닌 python 풀이 통과
+import sys
+input = sys.stdin.readline
+
+n = int(input())
+graph = [list(map(int, input().split())) for _ in range(n)]
+visit = [False for _ in range(n)]
+answer = 10**8
+temp = []
+
+def calc(start):
+    global answer
+    link = []
+    startHap = 0
+    linkHap = 0
+    for i, check in enumerate(visit):
+        if check == False:
+            link.append(i)
+
+    for i in start:
+        for j in start:
+            startHap += graph[i][j]
+
+    for i in link:
+        for j in link:
+            linkHap += graph[i][j]
+
+    answer = min(answer, abs(startHap-linkHap))
+
+def dfs(target):
+    if len(temp) == n // 2:
+        calc(temp)
+        return
+    for i in range(target, n):
+        if not visit[i]:
+            visit[i] = True
+            temp.append(i)
+            dfs(i)
+            temp.pop()
+            visit[i] = False
+
+dfs(0)
+print(answer)
