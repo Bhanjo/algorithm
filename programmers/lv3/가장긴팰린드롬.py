@@ -24,3 +24,42 @@ def solution(s):
     for i in range(len(s)-1):
         answer = max(answer, palindromeCheck(s, i, i+1), palindromeCheck(s, i, i+2))
     return answer
+
+
+# 복습
+answer = 1
+
+def pallin(word, idx, type):
+    global answer
+    cnt = 1 # 길이
+    left = idx - 1
+    right = idx + 1
+    
+    if type == 'even':
+        if word[idx] != word[idx+1]:
+            return
+        cnt = 2
+        right += 1
+    
+    
+    while(left >= 0 and right < len(word)):
+        if word[left] == word[right]:
+            cnt += 2
+            left -= 1
+            right += 1
+            answer = max(answer, cnt)
+        else:
+            break
+    
+
+def solution(s):
+    global answer
+    
+    if len(s) == 1:
+        return 1
+    
+    for i in range(1, len(s)-1):
+        pallin(s, i, 'even')
+        pallin(s, i, 'odd')
+
+    return answer
