@@ -34,3 +34,64 @@ def solution(m, n, board):
 
     return answer
 solution(4,5,["CCBDE", "AAADE", "AAABF", "CCBBF"])
+
+# 2회차
+from collections import deque
+
+def dropBlock(graph):
+    for y in range(len(graph[0])): # 가로
+        for x in range(len(graph)-2, -1, -1):
+            # 아래로 내릴 수 있을 때 까지
+            for targetX in range(x, len(graph)-1):
+                if graph[targetX+1][y] != '': break
+                graph[targetX+1][y] = graph[targetX][y]
+                graph[targetX][y] = ''
+
+def solution(m, n, board):
+    answer = 0
+    graph = []
+    dx = [1,0,1]
+    dy = [0,1,1]
+    popList = []
+    
+    # 그래프 업데이트
+    for i in board:
+        i = list(i)
+        graph.append(i)
+    
+    # i,j와 같은 그림 3개 찾기
+    def bfs(i,j,icon):
+        cnt = [[i,j]]
+        
+        for move in range(3):
+            mx = i + dx[move]
+            my = j + dy[move]
+            if 0 <= mx < m and 0 <= my < n:
+                # 기준과 같은 캐릭터인가 판별
+                if graph[mx][my] == icon:
+                    cnt.append([mx,my])
+                else:
+                    break
+        
+        if len(cnt) == 4:
+            popList.extend(cnt)
+    
+    while(True):
+        for i in range(m):
+            for j in range(n):
+                if graph[i][j] != '':
+                    bfs(i,j,graph[i][j])
+        if popList:
+            popList = list(set(map(tuple,popList)))
+            # 블록 제거
+            while(popList):
+                x,y = popList.pop()
+                graph[x][y] = ''
+                answer += 1
+            dropBlock(graph)
+        else:
+            break
+    
+    return answer
+
+solution(4,5,["CCBDE", "AAADE", "AAABF", "CCBBF"])
