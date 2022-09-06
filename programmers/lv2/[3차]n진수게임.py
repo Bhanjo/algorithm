@@ -40,3 +40,36 @@ def solution(n, t, m, p):
 
 solution(2,4,2,1)
 solution(16,16,2,1)
+
+# 2회차
+def changeNum(base, num): # base진법으로 num 바꾸기
+    arr = []
+    alpha = ['A', 'B', 'C', 'D', 'E', 'F']
+    if num == 0:
+        return [0]
+    
+    while(num > 0):
+        etc = num % base
+        if 10 <= etc <= 15:
+            etc = alpha[etc % 10]
+        arr.append(etc)
+        num = num // base
+    
+    return arr[::-1]
+
+def solution(n, t, m, p):
+    answer = []
+    nums = []
+    cnt = 0
+    
+    while(len(nums) <= 100000):
+        temp = changeNum(n,cnt)
+        nums.extend(temp)
+        cnt += 1
+    
+    idx = p-1
+    for i in range(t):
+        answer.append(str(nums[idx]))
+        idx += m
+        
+    return ''.join(answer)
