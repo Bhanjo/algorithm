@@ -28,3 +28,34 @@ def dijikstra(node):
 
 dijikstra(origin)
 print(distance[destination])
+
+# 2회차
+import heapq
+n = int(input())
+edge = int(input())
+graph = [[] for _ in range(n+1)]
+costs = [100000000 for _ in range(n+1)]
+
+for i in range(edge):
+    start, end, cost = map(int, input().split())
+    graph[start].append([end, cost])
+
+startPoint, endPoint = map(int, input().split())
+
+def dijikstra(startPoint):
+    costs[startPoint] = 0
+    h = []
+    heapq.heappush(h, [startPoint, 0])
+
+    while(h):
+        currNode, price = heapq.heappop(h)
+        if costs[currNode] < price:
+            continue
+        for nextNode, nextPrice in graph[currNode]:
+            totalPrice = costs[currNode] + nextPrice
+            if costs[nextNode] > totalPrice:
+                costs[nextNode] = totalPrice
+                heapq.heappush(h, [nextNode, totalPrice])
+
+dijikstra(startPoint)
+print(costs[endPoint])
