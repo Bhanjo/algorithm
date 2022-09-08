@@ -20,3 +20,24 @@ def solution(n, works):
         answer += val**2
     
     return answer
+
+# 2회차
+import heapq
+
+def solution(n, works):
+    answer = 0
+    h = []
+    for w in works:
+        heapq.heappush(h, [-w, w])
+    
+    for i in range(n):
+        work = heapq.heappop(h)
+        work[0] += 1
+        work[1] -= 1
+        heapq.heappush(h, work)
+    
+    while(h):
+        work = heapq.heappop(h)
+        if work[1] > 0:
+            answer += work[1]**2
+    return answer
