@@ -59,3 +59,50 @@ def solution(nodeinfo):
     
     answer = [pre, post]
     return answer
+
+# 2회차
+import sys
+sys.setrecursionlimit(10**6)
+
+preorder = []
+postorder = []
+
+def pre(nodeinfo):
+    if not nodeinfo: return
+    top = nodeinfo[0]
+    left, right = [], []
+
+    for node in nodeinfo:
+        if top[0] > node[0]: left.append(node)
+        if top[0] < node[0]: right.append(node)
+
+    preorder.append(top[2])
+    pre(left)
+    pre(right)
+
+def post(nodeinfo):
+    if not nodeinfo: return
+    top = nodeinfo[0]
+    left, right = [], []
+
+    for node in nodeinfo:
+        if top[0] > node[0]: left.append(node)
+        if top[0] < node[0]: right.append(node)
+
+    post(left)
+    post(right)
+    postorder.append(top[2])
+        
+def solution(nodeinfo):
+    answer = []
+    
+    for i in range(len(nodeinfo)):
+        nodeinfo[i].append(i+1)
+    nodeinfo.sort(key=lambda x:(-x[1], x[0]))
+    
+    pre(nodeinfo)
+    answer.append(preorder)
+    post(nodeinfo)
+    answer.append(postorder)
+    
+    return answer
