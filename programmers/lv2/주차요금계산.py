@@ -1,6 +1,5 @@
 import math
 
-
 def solution(fees, records):
     answer = []
     baseTime, baseFee, plusTime, plusFee  = fees
@@ -52,3 +51,61 @@ def solution(fees, records):
     return answer
 
 solution([1, 461, 1, 10],["00:00 1234 IN"])
+
+# 2회차
+def toMin(time):
+    arr = time.split(':')
+    hour = int(arr[0]) * 60
+    return hour + int(arr[1])
+
+def solution(fees, records):
+    answer = {}
+    cars = {}
+    
+    # 자동차 입출차 기록
+    for infos in records:
+        info = infos.split(" ") # 시간 번호 입출차
+        mini = toMin(info[0])
+        
+        if int(info[1]) not in cars:
+            cars[int(info[1])] = [mini]
+        else:
+            cars[int(info[1])].append(mini)
+    
+    # 시간 계산
+    for key in cars:
+        # 마지막 출차 기록 없는지 확인
+        if len(cars[key]) % 2 != 0:
+            cars[key].append(toMin('23:59'))
+        
+        # 최종 이용 시간 계산
+        while(cars[key]):
+            outTime = cars[key].pop()
+            inTime = cars[key].pop()
+            if key not in answer:
+                answer[key] = outTime - inTime
+            else:
+                answer[key] += outTime - inTime
+    
+    # 최종 비용 (fee = 기본시간 기본요금 단위시간 단위요금)
+    for key in answer:
+        totalTime = answer[key]
+        if totalTime <= fees[0]:
+            answer[key] = fees[1]
+        else:
+            rest = totalTime - fees[0]
+            overFee = 0
+            if rest % fees[2] != 0:
+                overFee = (rest // fees[2]) + 1
+            else: 
+                overFee = rest // fees[2]
+            answer[key] = fees[1] + (overFee * fees[3])
+    
+    answer = list(answer.items())
+    answer.sort(key = lambda x:x[0])
+    
+    finalAnswer = []
+    for key in answer:
+        finalAnswer.append(key[1])
+    
+    return finalAnswer
