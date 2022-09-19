@@ -17,3 +17,24 @@ def solution(number, k):
 
 # solution("4177252841", 4)
 solution("9876", 2)
+
+# 2회차
+def solution(number, k):
+    answer = ''
+    st = []
+    cnt = 0
+    
+    for i in number:
+        if len(st) == 0:
+            st.append(i)
+            continue
+        while len(st) > 0 and st[-1] < i and cnt < k:
+            st.pop()
+            cnt += 1
+        st.append(i)
+    
+    while cnt < k:
+        cnt += 1
+        st.pop()
+    
+    return ''.join(st)
